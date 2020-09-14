@@ -19,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignIn extends AppCompatActivity {
 
     //widgets
@@ -37,7 +40,7 @@ public class SignIn extends AppCompatActivity {
 
         //Init Firebase
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -48,15 +51,17 @@ public class SignIn extends AppCompatActivity {
                 mProgressDialog.setMessage("Please waiting...");
                 mProgressDialog.show();
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.child(edtPhone.getText().toString()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         //Check if user not exist in database
-                        if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
-                            //Get User information
+                        if (dataSnapshot.getKey().equals(edtPhone.getText().toString())) {
+
                             mProgressDialog.dismiss();
-                            User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                            Map<String, String> stringMap = (HashMap<String, String>) dataSnapshot.getValue();
+                            //Get User information
+                            User user = new User(stringMap.get("Name"), stringMap.get("Password"));
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
                             } else {

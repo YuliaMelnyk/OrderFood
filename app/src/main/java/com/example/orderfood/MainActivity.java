@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     //widgets
     Button btnSignIn,btnSignUp;
-    TextView txtSlogan;
+    TextView txtSlogan, txtName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Nabila.ttf");
         txtSlogan.setTypeface(typeface);
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        txtName = (TextView) findViewById(R.id.txtName);
+        Typeface typeface1 = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
+        txtName.setTypeface(typeface1);
 
-            }
-        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

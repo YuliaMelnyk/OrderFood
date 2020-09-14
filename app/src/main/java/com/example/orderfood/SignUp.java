@@ -32,7 +32,7 @@ public class SignUp extends AppCompatActivity {
         edtName = (MaterialEditText) findViewById(R.id.edtName);
         edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
 
-        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        btnSignUp = (Button) findViewById(R.id.btnSignnUp);
 
         //Init Firebase
 
@@ -51,6 +51,7 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Check if already user phone
+
                         if(dataSnapshot.child(edtPhone.getText().toString()).exists()){
                             mProgressDialog.dismiss();
                             Toast.makeText(SignUp.this, "Phone number already register", Toast.LENGTH_SHORT);

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">OrderFood</string>
     <string name="slogan">Don\'t waist your time</string>
+    <string name="primary_text">Eat it</string>
 </resources>
