@@ -1,5 +1,6 @@
 package com.example.orderfood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ public class Home extends AppCompatActivity
     private DatabaseReference category;
     private Query categoryQuery;
     private TextView txtFullName;
+    private FirebaseRecyclerAdapter adapter;
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
@@ -99,7 +101,7 @@ public class Home extends AppCompatActivity
 
     private void loadMenu() {
         FirebaseRecyclerOptions<Category> categoryOptions = new FirebaseRecyclerOptions.Builder<Category>().setQuery(categoryQuery, Category.class).build();
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(categoryOptions) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(categoryOptions) {
 
             @NonNull
             @Override
@@ -120,7 +122,11 @@ public class Home extends AppCompatActivity
                 holder.setItemClickListner(new ItemClickListner() {
                     @Override
                     public void onClick(View view, int position, boolean islongClick) {
-                        Toast.makeText(Home.this, "" + clickItem.getName(), Toast.LENGTH_SHORT).show();
+                        //Get CategoryId and send to New Activity
+                        Intent foodList = new Intent(Home.this, FoodList.class);
+                        //CategoryId is a key
+                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
             }
