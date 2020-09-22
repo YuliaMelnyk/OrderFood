@@ -18,5 +18,6 @@
     <string name="open_nav">Open navigation drawer</string>
     <string name="menu_name">Name of Menu</string>
     <string name="food_name">Name of Food</string>
+    <string name="toolbar_title">Food Name</string>
 
 </resources>
