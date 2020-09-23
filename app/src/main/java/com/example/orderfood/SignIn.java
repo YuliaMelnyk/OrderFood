@@ -63,7 +63,8 @@ public class SignIn extends AppCompatActivity {
                             mProgressDialog.dismiss();
                             Map<String, String> stringMap = (HashMap<String, String>) dataSnapshot.getValue();
                             //Get User information
-                            User user = new User(stringMap.get("Name"), stringMap.get("Password"));
+                            User user = new User(stringMap.get("Name"), stringMap.get("Password"), edtPhone.getText().toString());
+
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);
                                 Common.currentUser = user;
